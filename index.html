@@ -18,6 +18,46 @@ body {
   overflow: hidden;
 }
 
+/* ===== INTRO SCREEN ===== */
+#intro {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #b11226, #ffffff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.intro-box {
+  background: rgba(255,255,255,0.95);
+  padding: 28px 24px;
+  border-radius: 22px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(177,18,38,0.3);
+}
+
+.intro-box h2 {
+  color: #b11226;
+  margin-bottom: 10px;
+}
+
+.intro-box p {
+  color: #6b1a1a;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+#enter-btn {
+  background: #d62828;
+  color: #fff;
+  border: none;
+  border-radius: 22px;
+  padding: 10px 22px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
 /* ===== CARD ===== */
 .card {
   background: rgba(255,255,255,0.92);
@@ -50,15 +90,9 @@ h1 {
 }
 
 /* ===== TEXT ===== */
-.message {
-  margin: 8px 0;
-  font-size: 14px;
-  line-height: 1.55;
-  color: #6b1a1a;
-}
-
+.message,
 .question {
-  margin: 12px 0;
+  margin: 8px 0;
   font-size: 14px;
   line-height: 1.55;
   color: #6b1a1a;
@@ -108,17 +142,14 @@ canvas {
 /* ===== CORNER IMAGES ===== */
 .corner {
   position: fixed;
-  width: 140px;              /* 👈 TĂNG KÍCH THƯỚC */
+  width: 140px;
   opacity: 0.9;
   z-index: 0;
   pointer-events: none;
 
-  /* BO GÓC + STICKER */
   border-radius: 22px;
-  overflow: hidden;
   background: #fff;
-  padding: 4px;              /* 👈 GIẢM padding để ảnh to hơn */
-
+  padding: 4px;
   filter: drop-shadow(0 6px 12px rgba(177,18,38,0.25));
 }
 
@@ -139,11 +170,21 @@ canvas {
 
 <body>
 
-<audio id="bg-music" autoplay loop>
+<!-- ===== INTRO ===== -->
+<div id="intro">
+  <div class="intro-box">
+    <h2>🎄 Merry Christmas 🎄</h2>
+    <p>Nhấn vào đây nhé,<br>tớ có điều muốn nói…</p>
+    <button id="enter-btn">✨ Ấn vào đây ✨</button>
+  </div>
+</div>
+
+<!-- ===== MUSIC ===== -->
+<audio id="bg-music" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- ===== CORNER IMAGES (đổi ảnh ở đây) ===== -->
+<!-- ===== CORNER IMAGES ===== -->
 <img class="corner top-left" src="1.jfif">
 <img class="corner top-right" src="2.jfif">
 <img class="corner bottom-left" src="3.jfif">
@@ -151,6 +192,7 @@ canvas {
 
 <canvas id="snow"></canvas>
 
+<!-- ===== CARD CONTENT ===== -->
 <div class="card">
   <h1>🎄 Merry Christmas 🎄</h1>
 
@@ -200,17 +242,15 @@ canvas {
 
 <script>
 /* ===== TELEGRAM CONFIG ===== */
-const BOT_TOKEN = "8227496550:AAFVNyh3GB60f1VhcFaYV0scViQzc1X1vh4";
-const CHAT_ID  = "6586675810";
+const BOT_TOKEN = "YOUR_BOT_TOKEN";
+const CHAT_ID  = "YOUR_CHAT_ID";
 
+/* ===== TELEGRAM SEND ===== */
 function sendTelegram(message) {
   fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      chat_id: CHAT_ID,
-      text: message
-    })
+    body: JSON.stringify({ chat_id: CHAT_ID, text: message })
   });
 }
 
@@ -226,6 +266,17 @@ function friend(){
     "🌱 Không sao cả đâu.<br>Tớ vẫn rất trân trọng cậu 🤍";
   sendTelegram("🌿 KẾT QUẢ: Crush bấm Làm bạn thôi 🌱🤍");
 }
+
+/* ===== INTRO + MUSIC ===== */
+const intro = document.getElementById("intro");
+const enterBtn = document.getElementById("enter-btn");
+const music = document.getElementById("bg-music");
+music.volume = 0.15;
+
+enterBtn.onclick = () => {
+  music.play();
+  intro.style.display = "none";
+};
 
 /* ===== SNOW EFFECT ===== */
 const canvas = document.getElementById("snow");
@@ -266,17 +317,6 @@ function moveSnow() {
 }
 
 setInterval(drawSnow, 25);
-
-const music = document.getElementById("bg-music");
-music.volume = 0.15;
-
-document.addEventListener("DOMContentLoaded", () => {
-  music.play().catch(() => {
-    // bị trình duyệt chặn thì bỏ qua
-  });
-});
-
-  
 </script>
 
 </body>
