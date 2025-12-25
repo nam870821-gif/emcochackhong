@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Merry Christmas 🎄</title>
+
+<style>
+/* ===== BODY ===== */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #b11226, #ffffff);
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #6b1a1a;
+  overflow: hidden;
+}
+
+/* ===== CARD ===== */
+.card {
+  background: rgba(255,255,255,0.92);
+  padding: 22px 20px;
+  border-radius: 18px;
+  text-align: center;
+  width: 300px;
+  max-width: 90vw;
+  max-height: 82vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(177,18,38,0.25);
+  backdrop-filter: blur(6px);
+  z-index: 2;
+}
+
+/* ===== TITLE ===== */
+h1 {
+  color: #b11226;
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+/* ===== NAME ===== */
+.name {
+  margin-bottom: 10px;
+}
+.name span {
+  color: #d62828;
+  font-weight: 600;
+}
+
+/* ===== TEXT ===== */
+.message {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #6b1a1a;
+}
+
+.question {
+  margin: 12px 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #6b1a1a;
+}
+
+/* ===== BUTTONS ===== */
+.buttons {
+  margin-top: 12px;
+}
+.buttons button {
+  margin: 6px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  border: none;
+}
+
+.buttons button:first-child {
+  background: #d62828;
+  color: #fff;
+}
+
+.buttons button:last-child {
+  background: #fff;
+  color: #b11226;
+  border: 1px solid #d62828;
+}
+
+/* ===== RESULT ===== */
+#result {
+  margin-top: 10px;
+  color: #b11226;
+  font-weight: 500;
+  font-size: 13px;
+  min-height: 32px;
+}
+
+/* ===== SNOW ===== */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* ===== CORNER IMAGES ===== */
+.corner {
+  position: fixed;
+  width: 140px;              /* 👈 TĂNG KÍCH THƯỚC */
+  opacity: 0.9;
+  z-index: 0;
+  pointer-events: none;
+
+  /* BO GÓC + STICKER */
+  border-radius: 22px;
+  overflow: hidden;
+  background: #fff;
+  padding: 4px;              /* 👈 GIẢM padding để ảnh to hơn */
+
+  filter: drop-shadow(0 6px 12px rgba(177,18,38,0.25));
+}
+
+.top-left { top: 10px; left: 10px; }
+.top-right { top: 10px; right: 10px; }
+.bottom-left { bottom: 10px; left: 10px; }
+.bottom-right { bottom: 10px; right: 10px; }
+
+/* Mobile */
+@media (max-width: 480px) {
+  .corner {
+    width: 80px;
+    padding: 3px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== CORNER IMAGES (đổi ảnh ở đây) ===== -->
+<img class="corner top-left" src="1.jfif">
+<img class="corner top-right" src="2.jfif">
+<img class="corner bottom-left" src="3.jfif">
+<img class="corner bottom-right" src="4.jfif">
+
+<canvas id="snow"></canvas>
+
+<div class="card">
+  <h1>🎄 Merry Christmas 🎄</h1>
+
+  <p class="name">Gửi đến <span>💖 Cậu 💖</span></p>
+
+  <p class="message">
+    Qua thời gian trò chuyện cùng cậu,<br>
+    chính tớ cũng không biết mình đã thích cậu từ bao giờ nữa.<br>
+    Tớ thích cách cậu nói chuyện,<br>
+    thích cả tính cách của cậu.
+  </p>
+
+  <p class="message">
+    Mỗi khi đọc những dòng tin nhắn<br>
+    hay tâm sự cùng cậu,<br>
+    tớ đều vô thức mỉm cười —<br>
+    một cảm giác mà trước đây<br>
+    tớ chưa từng có với ai khác.
+  </p>
+
+  <p class="message">
+    Có lẽ đôi lúc tớ đã làm cậu khó chịu hay giận,<br>
+    nhưng thật lòng tớ không hề có ý xấu.<br>
+    Chỉ là tớ muốn được cậu chú ý nhiều hơn một chút thôi.
+  </p>
+
+  <p class="message">
+    Nếu tớ có sai ở đâu,<br>
+    mong cậu có thể bỏ qua cho tớ.
+  </p>
+
+  <p class="question">
+    Nếu cậu đồng ý cho tớ một cơ hội,<br>
+    tớ sẽ rất hạnh phúc.<br><br>
+    Còn nếu chưa thể,<br>
+    tớ vẫn mong chúng mình có thể tiếp tục làm bạn như bây giờ,<br>
+    vì tớ thực sự rất trân trọng sự hiện diện của cậu 🌱
+  </p>
+
+  <div class="buttons">
+    <button onclick="yes()">💝 Mình thử nhé</button>
+    <button onclick="friend()">🌿 Làm bạn thôi</button>
+  </div>
+
+  <p id="result"></p>
+</div>
+
+<script>
+/* ===== TELEGRAM CONFIG ===== */
+const BOT_TOKEN = "8227496550:AAFVNyh3GB60f1VhcFaYV0scViQzc1X1vh4";
+const CHAT_ID  = "6586675810";
+
+function sendTelegram(message) {
+  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: message
+    })
+  });
+}
+
+/* ===== BUTTON ACTION ===== */
+function yes(){
+  document.getElementById("result").innerHTML =
+    "🎄 Cảm ơn cậu vì đã cho tớ cơ hội 💖<br>Giáng sinh này tự nhiên ấm hơn hẳn rồi.";
+  sendTelegram("💝 KẾT QUẢ: Crush bấm Mình thử nhé 🎄💖");
+}
+
+function friend(){
+  document.getElementById("result").innerHTML =
+    "🌱 Không sao cả đâu.<br>Tớ vẫn rất trân trọng cậu 🤍";
+  sendTelegram("🌿 KẾT QUẢ: Crush bấm Làm bạn thôi 🌱🤍");
+}
+
+/* ===== SNOW EFFECT ===== */
+const canvas = document.getElementById("snow");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let flakes = [];
+for (let i = 0; i < 100; i++) {
+  flakes.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 4 + 1,
+    d: Math.random() + 1
+  });
+}
+
+function drawSnow() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "white";
+  ctx.beginPath();
+  for (let f of flakes) {
+    ctx.moveTo(f.x, f.y);
+    ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+  }
+  ctx.fill();
+  moveSnow();
+}
+
+function moveSnow() {
+  for (let f of flakes) {
+    f.y += f.d;
+    if (f.y > canvas.height) {
+      f.y = 0;
+      f.x = Math.random() * canvas.width;
+    }
+  }
+}
+
+setInterval(drawSnow, 25);
+</script>
+
+</body>
+</html>
